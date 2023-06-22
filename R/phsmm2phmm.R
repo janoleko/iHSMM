@@ -1,8 +1,8 @@
 #' Converting periodic hsmm to periodic hmm
 #'
-#' @param omega
-#' @param dm
-#' @param eps
+#' @param omega Matrix of conditional transition probabilities
+#' @param dm a list (in time) of lists (of states) of pmf vectors
+#' @param eps accuracy parameter
 #'
 #' @return
 #' @export

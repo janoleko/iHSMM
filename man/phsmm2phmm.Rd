@@ -7,7 +7,11 @@
 phsmm2phmm(omega, dm, eps = 1e-25)
 }
 \arguments{
-\item{eps}{}
+\item{omega}{Matrix of conditional transition probabilities}
+
+\item{dm}{a list (in time) of lists (of states) of pmf vectors}
+
+\item{eps}{accuracy parameter}
 }
 \description{
 Converting periodic hsmm to periodic hmm
