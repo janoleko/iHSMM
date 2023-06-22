@@ -1,8 +1,8 @@
 Package: iHSMM
 Title: What the Package Does (One Line, Title Case)
 Version: 1.0
-Authors@R: 
-    person("Jan-Ole", "Koslik", "jan-ole.koslik@uni-bielefeld.de", role = c("aut", "cre"))
+Authors@R: c(
+    person("Jan-Ole", "Koslik", "jan-ole.koslik@uni-bielefeld.de", role = c("aut", "cre")))
 Description: What the package does (one paragraph).
 License: MIT
     license
