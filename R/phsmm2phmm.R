@@ -21,7 +21,7 @@ phsmm2phmm = function(omega,dm,eps=1e-25){
     F[[k]] = Fk
   }
   for (t in 1:L){ # loop over time
-    G = matrix(0,0,sum(mv)) # constructing an empty matrix with number of columns equal to final dimension (sum_i m_i)
+    G = Matrix::Matrix(0,0,sum(mv),sparse=T) # constructing an empty matrix with number of columns equal to final dimension (sum_i m_i)
     for (i in 1:m){ # loop over states
       mi = mv[i] # length of pmf for state aggregate i
       ci = numeric(mi)
@@ -31,7 +31,7 @@ phsmm2phmm = function(omega,dm,eps=1e-25){
         ci[k+1] = ifelse(abs(1-F[[l]][[i]][k+1])>eps,dm[[l]][[i]][k+1]/(1-F[[l]][[i]][k+1]),1)
       }
       cim = ifelse(1-ci>0,1-ci,0)
-      Gi = matrix(0,mi,0)
+      Gi = Matrix::Matrix(0,mi,0,sparse=T)
       for (j in 1:m){
         if(i==j) {
           if(mi==1){
@@ -40,13 +40,13 @@ phsmm2phmm = function(omega,dm,eps=1e-25){
             Gi = cbind(Gi,rbind(cbind(rep(0,mi-1),diag(cim[-mi],mi-1,mi-1)),
                                 c(rep(0,mi-1),cim[[mi]])))}
         } else   { if(mi==1)
-        { Gi = cbind(Gi,matrix(c(omega[[i,j]]*ci,rep(0,mv[[j]]-1)),1))} else
-        { Gi = cbind(Gi,cbind(omega[[i,j]]*ci,matrix(0,mv[[i]],mv[[j]]-1)))}
+        { Gi = cbind(Gi,Matrix::Matrix(c(omega[[i,j]]*ci,rep(0,mv[[j]]-1)),1,sparse=T))} else
+        { Gi = cbind(Gi,cbind(omega[[i,j]]*ci,Matrix::Matrix(0,mv[[i]],mv[[j]]-1,sparse=T)))}
         }
       }
       G = rbind(G,Gi)
     }
-    G_all[[t]] = G
+    G_all[[t]] = Matrix::Matrix(G,sparse=T)
   }
   G_all
 }
