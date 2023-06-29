@@ -2,4 +2,5 @@
 
 export(hsmm2hmm)
 export(phsmm2phmm)
+export(phsmm2phmm2)
 export(pv)
